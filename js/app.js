@@ -18,7 +18,7 @@ angular.module('musicApp',['ngResource','ui.bootstrap','directives','factory','s
   appServices.setGenerList(RestService.genre.query());
 })
 
-.controller('mainController',function($scope,appServices,$uibModal,$log){
+.controller('mainController',function($scope,appServices,RestService,$uibModal,$log){
 	$scope.appTitle = "Music App";
 	$scope.tracks = appServices.getTrackList();
 	$scope.genres = appServices.getGenerList();
@@ -26,9 +26,7 @@ angular.module('musicApp',['ngResource','ui.bootstrap','directives','factory','s
     $scope.currentGenrePage = 1;
 	$scope.pageSize = 7;
 
-  $scope.searchTrack = function(){
-    alert($scope.searchText);
-  }
+
 	$scope.openTrackModal = function(size,track){
 		var modalInstance = $uibModal.open({
       animation: true,

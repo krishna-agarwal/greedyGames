@@ -69,7 +69,7 @@ angular.module('musicApp',['ngResource','ui.bootstrap','directives','factory','s
 
 .controller('trackModalCtrl', function($scope,appServices,RestService, $uibModalInstance, $resource, track){
 
-  $scope.modalHeader = track ? "Add New Track" : "Edit Track";
+  $scope.modalHeader = track ? "Edit Track" : "Add New Track";
   $scope.genres = appServices.getGenerList();
   
   $scope.trackName = track ? track.title : null;
@@ -136,7 +136,7 @@ angular.module('musicApp',['ngResource','ui.bootstrap','directives','factory','s
 })
 
 .controller('genreModalCtrl',function($scope,appServices,RestService, $uibModalInstance, $resource, genre){
-  $scope.modalHeader = track ? "Add New Genre" : "Edit Genre";
+  $scope.modalHeader = track ? "Edit Genre" : "Add New Genre";
 
   $scope.genreName = genre ? genre.name : null;
   

@@ -136,7 +136,7 @@ angular.module('musicApp',['ngResource','ui.bootstrap','directives','factory','s
 })
 
 .controller('genreModalCtrl',function($scope,appServices,RestService, $uibModalInstance, $resource, genre){
-  $scope.modalHeader = track ? "Edit Genre" : "Add New Genre";
+  $scope.modalHeader = genre ? "Edit Genre" : "Add New Genre";
 
   $scope.genreName = genre ? genre.name : null;
   

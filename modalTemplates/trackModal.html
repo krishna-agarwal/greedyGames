@@ -1,0 +1,17 @@
+<div class="modal-header" id="modalHeader">
+    <h3 class="modal-title">Add New Track</h3>
+</div>
+<div class="modal-body">
+  <label for="name">Track:</label>
+		<input type="text" class="form-control" id="name" ng-model="trackName" placeholder="Enter Track...">
+		<label>Genre:</label>
+		<div class="checkbox" id="genreCheckbox">
+      <label ng-repeat="genre in genres"><input type="checkbox" ng-model="bool" ng-checked="isChecked(genre.id)" ng-change="syncCheckBox(bool,genre)" value="genre.id">{{genre.name}}</label>
+      </div>
+
+  <div star-rating rating-value="trackRating" max="5" read-only="false" id="editRating"></div>
+</div>
+<div class="modal-footer" id="modalFooter">
+    <button class="btn btn-danger" type="button" ng-click="submit()">Submit</button>
+    <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+</div>

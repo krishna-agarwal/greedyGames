@@ -16,6 +16,10 @@ angular.module('musicApp',['ngResource','ui.bootstrap','directives','factory','s
 .run(function($resource,appServices,RestService) {
   appServices.setTrackList(RestService.track.query());
   appServices.setGenerList(RestService.genre.query());
+
+  SC.initialize({
+    client_id : '64b0b0355a5762d2e513b01dc74d66ac'
+  });
 })
 
 .controller('mainController',function($scope,appServices,RestService,$uibModal,$log){
@@ -23,8 +27,14 @@ angular.module('musicApp',['ngResource','ui.bootstrap','directives','factory','s
 	$scope.tracks = appServices.getTrackList();
 	$scope.genres = appServices.getGenerList();
 	$scope.currentTrackPage = 1;
-    $scope.currentGenrePage = 1;
+  $scope.currentGenrePage = 1;
 	$scope.pageSize = 7;
+
+  $scope.player = null;
+  $scope.isPlaying = null;
+  $scope.playingId = null;
+  $scope.volume = 5;
+  $scope.currentTime = '0:00';
 
 
 	$scope.openTrackModal = function(size,track){
@@ -59,8 +69,79 @@ angular.module('musicApp',['ngResource','ui.bootstrap','directives','factory','s
         }
       }
     });
+  };
 
+  
+  $scope.toggleMusicPlayer = function(track){
+    if($scope.isPlaying && $scope.playingId == track.id){
+
+    }else{
+      var element = angular.element(document.getElementById('player_'+track.id));
+      if(element.hasClass('musicPlayer')){
+        element.removeClass('musicPlayer')
+      }else{
+        element.addClass('musicPlayer')
+      }
+    }
     
+  }
+
+  $scope.showTimer = function(id){
+    if($scope.playingId && $scope.playingId == id){
+      return false
+    }else{
+      return true;
+    }
+  }
+
+  $scope.changeVolume = function(volume){
+    if($scope.isPlaying && $scope.player){
+      $scope.player.setVolume(volume/10)
+    }
+  }
+
+  $scope.playSoundCloud = function(track) {
+    if($scope.isPlaying && $scope.playingId == track.id){
+      $scope.player.pause();
+      console.log('paused');
+      document.getElementById('playBtn_'+track.id).innerHTML = 'Play';
+      $scope.isPlaying = false;
+    }else{
+      if($scope.playingId && $scope.playingId != track.id){
+        document.getElementById('playBtn_'+$scope.playingId).innerHTML = 'Play';
+      }
+      SC.get('/tracks',{q : track.title,limit : 1}).then(function(scTracks){
+        console.log(scTracks)
+        $scope.totalTime = $scope.millisToMinutesAndSeconds(scTracks[0].duration);
+        if(scTracks && scTracks.length){
+          SC.stream('/tracks/'+scTracks[0].id).then(function(scPlayer){
+            $scope.player = scPlayer
+            scPlayer.play();
+            scPlayer.setVolume(5)
+            scPlayer.on('play-start',function(){
+              console.log('playing')
+              $scope.isPlaying = true;
+              $scope.playingId = track.id;
+            });
+            scPlayer.on('time',function(){
+              $scope.$apply(function () {
+                
+                $scope.currentTime = $scope.millisToMinutesAndSeconds(scPlayer.currentTime())
+              });
+              
+            })
+            document.getElementById('playBtn_'+track.id).innerHTML = 'Pause';
+          });
+        }
+      });
+    }
+    
+  }
+
+  $scope.millisToMinutesAndSeconds = function(millis){
+    var minutes = Math.floor(millis / 60000);
+    var seconds = ((millis % 60000) / 1000).toFixed(0);
+    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
   }
 	
 })

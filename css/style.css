@@ -71,20 +71,20 @@ table{
 }
 
 .trackRow{
-	-webkit-transition: 0.3s ease-in-out;
+	/*-webkit-transition: 0.3s ease-in-out;
     -moz-transition: 0.3s ease-in-out;
     -o-transition: 0.3s ease-in-out;
-    transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;*/
 }
 .trackRow:hover{
-	cursor: pointer;
+	/*cursor: pointer;
 	background-color: #C13131;
 	color: #fff;
 	-webkit-transform: scale(1.2);
     -moz-transform: scale(1.2);
     -o-transform: scale(1.2);
     -ms-transform: scale(1.2);
-    transform: scale(1.2);
+    transform: scale(1.2);*/
 }
 
 #addTrackButton{
@@ -161,4 +161,95 @@ ul.rating {
 }
 #genreCheckbox label{
     width: 120px;
+}
+
+.musicPlayer{
+    text-align: center;
+    display: none;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  margin: 3.15px 0;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6.7px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: rgba(211, 29, 34, 0.81);
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 1.8px 1.8px 1px #000000, 0px 0px 1.8px #0d0d0d;
+  border: 0px solid #000000;
+  height: 13px;
+  width: 21px;
+  border-radius: 18px;
+  background: #ffffff;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -3.35px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: rgba(225, 40, 45, 0.81);
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 6.7px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: rgba(211, 29, 34, 0.81);
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 1.8px 1.8px 1px #000000, 0px 0px 1.8px #0d0d0d;
+  border: 0px solid #000000;
+  height: 13px;
+  width: 21px;
+  border-radius: 18px;
+  background: #ffffff;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 6.7px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: rgba(189, 26, 30, 0.81);
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]::-ms-fill-upper {
+  background: rgba(211, 29, 34, 0.81);
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]::-ms-thumb {
+  box-shadow: 1.8px 1.8px 1px #000000, 0px 0px 1.8px #0d0d0d;
+  border: 0px solid #000000;
+  height: 13px;
+  width: 21px;
+  border-radius: 18px;
+  background: #ffffff;
+  cursor: pointer;
+  height: 6.7px;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: rgba(211, 29, 34, 0.81);
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: rgba(225, 40, 45, 0.81);
 }
